@@ -1,7 +1,12 @@
 {{page-title "Portfolio"}}
 
 {{!-- The following component displays Ember's default welcome message. --}}
-<WelcomePage />
+{{!-- <WelcomePage /> --}}
 {{!-- Feel free to remove this! --}}
+{{#if this.isLoading}}
+<Loader/>
+{{/if}}
+<NavBar/>
+<Header/>
 
 {{outlet}}
