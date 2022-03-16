@@ -1,3 +1,5 @@
 import Component from '@glimmer/component';
-
-export default class HeaderComponent extends Component {}
+import { action } from '@ember/object';
+export default class HeaderComponent extends Component {
+    
+}

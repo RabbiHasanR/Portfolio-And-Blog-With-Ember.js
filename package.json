@@ -23,7 +23,9 @@
     "test:ember": "ember test"
   },
   "devDependencies": {
+    "@ember/jquery": "^2.0.0",
     "@ember/optional-features": "^2.0.0",
+    "@ember/render-modifiers": "^2.0.4",
     "@ember/test-helpers": "^2.4.2",
     "@glimmer/component": "^1.0.4",
     "@glimmer/tracking": "^1.0.4",
