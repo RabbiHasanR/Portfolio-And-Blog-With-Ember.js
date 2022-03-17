@@ -195,8 +195,8 @@ function switchWord($oldWord, $newWord) {
 }
 
 export default class HeaderComponent extends Component {
-    @action
-    headerAnimation() {
-        initHeadline();
-    }
+  @action
+  headerAnimation() {
+    initHeadline();
+  }
 }
