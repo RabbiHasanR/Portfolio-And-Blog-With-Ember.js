@@ -3,14 +3,27 @@
 {{!-- The following component displays Ember's default welcome message. --}}
 {{!-- <WelcomePage /> --}}
 {{!-- Feel free to remove this! --}}
-<Loader/>
+<div {{did-insert this.scroll}}>
+    <Loader/>
 
-<NavBar/>
+    <NavBar/>
 
-<Header/>
+    <Header/>
 
-<Hero/>
+    <Hero/>
 
-<Resume/>
+    <Resume/>
+
+    <Service/>
+
+    <Number/>
+
+    <Portfolio/>
+
+    <Testimonial/>
+
+    <Blog/>
+
+</div>
 
 {{outlet}}
