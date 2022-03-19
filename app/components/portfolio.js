@@ -13,7 +13,6 @@ export default class PortfolioComponent extends Component {
         enabled: true,
       },
     });
-
     // isotope
     $('.gallery').isotope({
       // options

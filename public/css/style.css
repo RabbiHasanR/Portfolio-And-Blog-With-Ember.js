@@ -26,7 +26,7 @@
 		12 Contact
 		13 Footer
 		14 Responsive
-	
+
 
 ---------------------------------------------------------------- */
 /* ----------------------------------------------------------------
@@ -407,7 +407,7 @@ span, a, a:hover {
   color: #fff;
 }
 .navbar .navbar-nav .nav-link {
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 600;
   color: #eee;
   letter-spacing: .5px;
