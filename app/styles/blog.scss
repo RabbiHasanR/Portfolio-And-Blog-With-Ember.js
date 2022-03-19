@@ -1,0 +1,170 @@
+@mixin bs-multiple-carousel-item-repeater($count) {
+    $result-selector: "";
+  
+    //main loop
+    @while $count > 0 {
+      $result-selector: $result-selector + "+ .carousel-item";
+      $count: $count - 1;
+  
+      //secondary loop
+      $nested-count: $count;
+      @while $nested-count > 0 {
+        $result-selector: $result-selector + "+ .carousel-item";
+        $nested-count: $nested-count - 1;
+      }
+  
+      @if $count != 0 {
+        $result-selector: $result-selector + ",";
+      }
+    }
+  
+    #{$result-selector} {
+      @content;
+    }
+  }
+  
+  @mixin bs-multiple-carousel-item-nesting($count) {
+    $result-selector: "";
+  
+    //main loop
+    @while $count > 0 {
+      $result-selector: $result-selector + "+ .carousel-item";
+      $count: $count - 1;
+    }
+  
+    #{$result-selector} {
+      @content;
+    }
+  }
+  
+  @mixin bs-multiple-carousel($items-count: 2) {
+    .carousel-item.active,
+    .carousel-item-next,
+    .carousel-item-prev {
+      display: flex; //block
+    }
+  
+    .carousel-inner {
+      overflow: visible;
+  
+      .carousel-item {
+        // NEW to v4.3.1: all margin-right properties come with -100% as default
+        // causing all hidden items to be out of the screen
+        margin-right: inherit;
+  
+        &.active {
+          @include bs-multiple-carousel-item-repeater($items-count) {
+            display: flex; //block // three visible items
+          }
+  
+          // prevents opposite direction "animation"
+          &:not(.carousel-item-right):not(.carousel-item-left) {
+            transition: none;
+  
+            @include bs-multiple-carousel-item-repeater($items-count - 1) {
+              transition: none;
+            }
+          }
+  
+          // allows new item to be visible in order to "slide in" into place
+          @include bs-multiple-carousel-item-nesting($items-count) {
+            position: absolute;
+            top: 0;
+            right: -(percentage(1 / $items-count));
+            z-index: -1;
+            display: flex; //block
+            visibility: visible;
+            height: 100%;
+          }
+        } // .active
+        &-next,
+        &-prev {
+          position: relative;
+          transform: translate3d(0, 0, 0);
+        }
+      } // .carousel-item
+  
+      // farthest right hidden item must be also positioned for animations
+      .carousel-item-prev.carousel-item-right {
+        position: absolute;
+        top: 0;
+        right: 100%;
+        z-index: -1;
+        display: flex; //block
+        visibility: visible;
+        height: 100%;
+        transform: translate3d(100%, 0, 0);
+      }
+    } // .carousel-inner
+  
+    // left or forward direction
+    .active.carousel-item-left + .carousel-item-next.carousel-item-left {
+      position: relative;
+      transform: translate3d(-100%, 0, 0);
+      visibility: visible;
+    }
+  
+    .carousel-item-next.carousel-item-left {
+      @include bs-multiple-carousel-item-repeater($items-count) {
+        position: relative;
+        transform: translate3d(-100%, 0, 0);
+        visibility: visible;
+      }
+    }
+  
+    // right or previous direction
+    .active.carousel-item-right + .carousel-item-prev.carousel-item-right {
+      position: relative;
+      transform: translate3d(100%, 0, 0);
+      display: flex; //block
+      visibility: visible;
+    }
+  
+    .carousel-item-prev.carousel-item-right {
+      @include bs-multiple-carousel-item-repeater($items-count) {
+        position: relative;
+        transform: translate3d(100%, 0, 0);
+        display: flex; //block
+        visibility: visible;
+      }
+    }
+  }
+  
+  .carousel-multiple {
+    // &::before {
+    //   display: block;
+    //   margin-bottom: 20px;
+  
+    //   font-size: 30px;
+    //   content: "xs - default breakpoint";
+    // }
+  
+    @media (min-width: 576px) and (max-width: 767px) {
+    //   &::before {
+    //     content: "media-breakpoint-between(sm, sm)";
+    //   }
+      @include bs-multiple-carousel(2);
+    }
+  
+    @media (min-width: 768px) and (max-width: 991px) {
+    //   &::before {
+    //     content: "media-breakpoint-between(md, md)";
+    //   }
+      @include bs-multiple-carousel(3);
+    }
+  
+    @media (min-width: 992px) and (max-width: 1199px) {
+    //   &::before {
+    //     content: "media-breakpoint-between(lg, lg)";
+    //   }
+      @include bs-multiple-carousel(3);
+    }
+  
+    @media (min-width: 1200px) {
+    //   &::before {
+    //     content: "media-breakpoint-up(xl)";
+    //   }
+      @include bs-multiple-carousel(3);
+    }
+  }
+  
