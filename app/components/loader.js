@@ -8,6 +8,6 @@ export default class LoaderComponent extends Component {
     // Preloader
     later(() => {
       $('.loading').fadeOut(500);
-    }, 1000);
+    }, 2000);
   }
 }
